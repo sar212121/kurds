@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="ku">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bloga Kurdî - Sernavê gotarê</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&family=Noto+Sans:wght@400;700&family=Lora:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FFC107;
+            --secondary-color: #FFD54F;
+            --background-color: #f4f4f4;
+            --text-color: #333;
+            --card-bg-color: #fff;
+            --header-bg-color: #fff;
+            --font-size: 16px;
+            --font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        .dark-mode {
+            --primary-color: #FFD54F;
+            --secondary-color: #FFE082;
+            --background-color: #121212;
+            --text-color: #e0e0e0;
+            --card-bg-color: #1e1e1e;
+            --header-bg-color: #1e1e1e;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.3s ease, color 0.3s ease, font-size 0.3s ease;
+        }
+
+        body {
+            font-family: var(--font-family);
+            font-size: var(--font-size);
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        header {
+            background-color: var(--header-bg-color);
+            padding: 1rem 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        header .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.5s ease forwards;
+        }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .content {
+            flex: 2;
+            margin-right: 2rem;
+        }
+
+        article {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            padding: 2rem;
+            transition: transform 0.3s ease;
+        }
+
+        article:hover {
+            transform: translateY(-5px);
+        }
+
+        article h2 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        article .meta {
+            font-size: 0.9rem;
+            color: #777;
+            margin-bottom: 1rem;
+        }
+
+        article img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+        }
+
+        .social-share {
+            margin-top: 1rem;
+        }
+
+        .social-share button {
+            background-color: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin-right: 10px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .social-share button:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-2px);
+        }
+
+        .comments {
+            background-color: var(--card-bg-color);
+            padding: 1rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .sidebar {
+            flex: 1;
+        }
+
+        .widget {
+            background-color: var(--card-bg-color);
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+        }
+
+        .widget h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .widget ul {
+            list-style-type: none;
+        }
+
+        .widget ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .widget ul li a {
+            text-decoration: none;
+            color: var(--text-color);
+            transition: color 0.3s ease;
+        }
+
+        .widget ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        footer {
+            background-color: var(--header-bg-color);
+            color: var(--text-color);
+            text-align: center;
+            padding: 1rem 0;
+            margin-top: 2rem;
+        }
+
+        .dark-mode-toggle {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-size: 1.2rem;
+            cursor: pointer;
+        }
+
+        .social-links a {
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin: 0 10px;
+            transition: color 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--primary-color);
+        }
+
+        #customization-panel {
+            position: fixed;
+            top: 50%;
+            right: -300px;
+            transform: translateY(-50%);
+            width: 300px;
+            background-color: var(--card-bg-color);
+            padding: 20px;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            z-index: 1001;
+        }
+
+        #customization-panel.open {
+            right: 0;
+        }
+
+        #customization-toggle {
+            position: fixed;
+            top: 50%;
+            right: 0;
+            transform: translateY(-50%);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            padding: 10px;
+            cursor: pointer;
+            z-index: 1002;
+        }
+
+        .customization-option {
+            margin-bottom: 15px;
+        }
+
+        .customization-option label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .customization-option select,
+        .customization-option input[type="range"] {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            main {
+                flex-direction: column;
+            }
+
+            .content, .sidebar {
+                margin-right: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/3/35/Flag_of_Kurdistan.svg" alt="Kurdistan Flag">
+                Bloga Kurdî
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#"><i class="fas fa-home"></i> Mal</a></li>
+                    <li><a href="#"><i class="fas fa-list"></i> Kategorî</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Derbarê me</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Têkilî</                    <li><a href="#"><i class="fas fa-envelope"></i> Têkilî</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container">
+        <main>
+            <section class="content">
+                <article>
+                    <h2>Sernavê gotarê</h2>
+                    <div class="meta">
+                        <span><i class="fas fa-user"></i> Navê nivîskar</span> |
+                        <span><i class="fas fa-calendar"></i> 10ê Gulanê, 2023</span> |
+                        <span><i class="fas fa-folder"></i> Teknolojî</span>
+                    </div>
+                    <img src="https://picsum.photos/800/400" alt="Wêneya gotarê">
+                    <p>Naverok... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                    <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                    <div class="social-share">
+                        <button><i class="fab fa-facebook-f"></i> Facebook</button>
+                        <button><i class="fab fa-twitter"></i> Twitter</button>
+                        <button><i class="fab fa-linkedin-in"></i> LinkedIn</button>
+                    </div>
+                </article>
+                <section class="comments">
+                    <h3>Şîrove</h3>
+                    <p>Hîn tu şîrove tune ne. Yekem kes be ku şîrove dike!</p>
+                </section>
+            </section>
+
+            <aside class="sidebar">
+                <div class="widget">
+                    <h3>Derbarê nivîskar</h3>
+                    <p>Agahdariya nivîskar... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <div class="widget">
+                    <h3>Gotarên têkildar</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Gotara 1</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Gotara 2</a></li>
+                        <li><a href="#"><i class="fas fa-chevron-right"></i> Gotara 3</a></li>
+                    </ul>
+                </div>
+                <div class="widget">
+                    <h3>Kategorî</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-laptop"></i> Teknolojî</a></li>
+                        <li><a href="#"><i class="fas fa-theater-masks"></i> Çand</a></li>
+                        <li><a href="#"><i class="fas fa-book"></i> Wêje</a></li>
+                        <li><a href="#"><i class="fas fa-palette"></i> Huner</a></li>
+                    </ul>
+                </div>
+                <div class="widget">
+                    <h3>Arşîv</h3>
+                    <ul>
+                        <li><a href="#"><i class="fas fa-archive"></i> Gulan 2023</a></li>
+                        <li><a href="#"><i class="fas fa-archive"></i> Nîsan 2023</a></li>
+                        <li><a href="#"><i class="fas fa-archive"></i> Adar 2023</a></li>
+                    </ul>
+                </div>
+            </aside>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Bloga Kurdî. Hemû maf parastî ne.</p>
+            <div class="social-links">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <div id="customization-toggle">
+        <i class="fas fa-cog"></i>
+    </div>
+
+    <div id="customization-panel">
+        <h3>Özelleştirme Seçenekleri</h3>
+        <div class="customization-option">
+            <label for="font-family">Yazı Tipi:</label>
+            <select id="font-family">
+                <option value="'Roboto', Arial, sans-serif">Roboto</option>
+                <option value="'Noto Sans', Arial, sans-serif">Noto Sans</option>
+                <option value="'Lora', serif">Lora</option>
+            </select>
+        </div>
+        <div class="customization-option">
+            <label for="font-size">Yazı Boyutu:</label>
+            <input type="range" id="font-size" min="12" max="24" value="16">
+            <span id="font-size-value">16px</span>
+        </div>
+        <div class="customization-option">
+            <label for="color-scheme">Renk Şeması:</label>
+            <select id="color-scheme">
+                <option value="default">Varsayılan</option>
+                <option value="green">Yeşil</option>
+                <option value="blue">Mavi</option>
+                <option value="red">Kırmızı</option>
+            </select>
+        </div>
+        <div class="customization-option">
+            <label for="dark-mode">Karanlık Mod:</label>
+            <input type="checkbox" id="dark-mode">
+        </div>
+    </div>
+
+    <script>
+        const darkModeToggle = document.getElementById('darkModeToggle');
+        const body = document.body;
+
+        darkModeToggle.addEventListener('click', () => {
+            body.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                darkModeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            } else {
+                darkModeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            }
+        });
+
+        // Sayfa geçişleri için animasyon
+        document.addEventListener('DOMContentLoaded', (event) => {
+            document.body.style.opacity = 0;
+            setTimeout(() => {
+                document.body.style.transition = 'opacity 0.5s ease';
+                document.body.style.opacity = 1;
+            }, 0);
+        });
+
+        // Sayfa içi linklere tıklandığında animasyon
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Özelleştirme paneli için yeni kodlar
+        const customizationToggle = document.getElementById('customization-toggle');
+        const customizationPanel = document.getElementById('customization-panel');
+        const fontFamilySelect = document.getElementById('font-family');
+        const fontSizeInput = document.getElementById('font-size');
+        const fontSizeValue = document.getElementById('font-size-value');
+        const colorSchemeSelect = document.getElementById('color-scheme');
+        const darkModeCheckbox = document.getElementById('dark-mode');
+
+        customizationToggle.addEventListener('click', () => {
+            customizationPanel.classList.toggle('open');
+        });
+
+        fontFamilySelect.addEventListener('change', (e) => {
+            document.documentElement.style.setProperty('--font-family', e.target.value);
+        });
+
+        fontSizeInput.addEventListener('input', (e) => {
+            const size = e.target.value + 'px';
+            document.documentElement.style.setProperty('--font-size', size);
+            fontSizeValue.textContent = size;
+        });
+
+        colorSchemeSelect.addEventListener('change', (e) => {
+            switch (e.target.value) {
+                case 'green':
+                    document.documentElement.style.setProperty('--primary-color', '#4CAF50');
+                    document.documentElement.style.setProperty('--secondary-color', '#81C784');
+                    break;
+                case 'blue':
+                    document.documentElement.style.setProperty('--primary-color', '#2196F3');
+                    document.documentElement.style.setProperty('--secondary-color', '#64B5F6');
+                    break;
+                case 'red':
+                    document.documentElement.style.setProperty('--primary-color', '#F44336');
+                    document.document
